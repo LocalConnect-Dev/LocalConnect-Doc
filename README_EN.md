@@ -31,7 +31,7 @@ This shows the definition and the range of each types of values.
 |Type|Range|Description|
 |---|---|---|
 |uint|0 - 4,294,967,295|A **unsigned** numeric value that it can be placed on 32-bit area.|
-|string|N/A|A string value that contains chars of Unicode.
+|string|N/A|A string value that contains chars of Unicode.|
 
 ## 5. Objects
 The object shows a thing with member values.
