@@ -1,58 +1,58 @@
-# Local Connect -  API Document
-This shows usage of the Local Connect API.
+# Local Connect -  API ドキュメント
+Local Connect API の使用方法を示します。
 
-## 1. Request and Response
-- The client sends a request to the server with `application/www-form-urlencoded` type.
-  The requests have parameters and headers according to the `HTTP/1.1` protocol.
-- After the server proceeded the request, the server returns responses to the client with `application/json` type.
-  For details, see the `RFC4627` standard.  
+## 1. リクエストとレスポンス
+- クライアントはサーバへリクエストを `application/www-form-urlencoded` 形式で送信します。
+  リクエストは `HTTP/1.1` プロトコルに基づいたパラメータ及びヘッダを持ちます。
+- サーバがリクエストを処理した後、サーバはクライアントへレスポンスを `application/json` 形式で返します。
+  JSON形式の詳細は、 `RFC4627` 規格をご覧ください。  
   [http://www.ietf.org/rfc/rfc4627](http://www.ietf.org/rfc/rfc4627)
 
-## 2. Error
-- When the server failed to proceed the request, it returns an error with the `Error` object.
-  For details, see the specification of the object below.
+## 2. エラー
+- サーバがリクエストの処理に失敗したとき、サーバは `Error` オブジェクトを返します。
+  詳細は、後述する 5. オブジェクト の `Error` オブジェクトをご覧ください。
 
-### a. Error Codes
-|Code|HTTP Status|Description|
+### a. エラーコードの一覧
+|コード|HTTP ステータス|説明|
 |---|---|---|
-|`ENDPOINT_NOT_FOUND`|404|When the specified API endpoint is not found.|
+|`ENDPOINT_NOT_FOUND`|404|リクエストされた API エンドポイントが存在しなかったとき。|
 
-## 3. Authentification and Authorization
-- The user logs into the system with its token (may be as a QR code).
-  At this time, the server provides a session to the client.
-  Hereinafter, this is called **authentification** (authentificating).
-- After the user logged in, when the client uses the API, the client creates a request with `X-LocalConnect-Session` header includes the session.
-  At this time, the client gets restrictive permission (not permanently).
-  Hereinafter, this is called **authorization** (authorizing).
+## 3. 認証と承認
+- ユーザはQRコードなどで示されたトークンを用いて、システムにログインします。
+  このとき、サーバはクライアントにセッションを付与します。
+  これを **認証** (Authentification) と呼びます。
+- ユーザがログインした後、クライアントがAPIを使用するとき、クライアントはリクエストを `X-LocalConnect-Session` ヘッダにセッションを含めて作成します。
+  このとき、クライアントは永続的でない限定的な権限を持ちます。
+  これを **承認** (Authorization) と呼びます。
 
-## 4. Types
-This shows the definition and the range of each types of values.
+## 4. 型
+それぞれの値の種類について、定義と取り得る値の範囲を示します。
 
-|Type|Range|Description|
+|型|範囲|説明|
 |---|---|---|
-|uint|0 - 4,294,967,295|A **unsigned** numeric value that it can be placed on 32-bit area.|
-|string|N/A|A string value that contains chars of Unicode.
+|uint|0 - 4,294,967,295|32ビットで表される **0以上の** 数値。|
+|string|N/A|Unicode文字で表される文字列。|
 
-## 5. Objects
-The object shows a thing with member values.
-**Objects can be Types in JSON.**
-### a. `User` Object
-This shows a user.
+## 5. オブジェクト
+メンバ値を持って、ある物を表現します。
+**JSON オブジェクト内では、オブジェクトも型となります。**
+### a. `User` オブジェクト
+ユーザを示します。
 
-|Member|Type|Description|
+|メンバ|型|説明|
 |---|---|---|
-|id|string|A unique identifier (hereinafter, this is called **an UUID**) of the user.|
-|name|string|A name of the user.|
-|type|UserType|The type of the user.|
-|group|Group|The group that the user belongs to.|
+|id|string|ユーザ固有の識別子 (**UUID** といいます) 。|
+|name|string|ユーザの名前。|
+|type|UserType|ユーザの種類。|
+|group|Group|ユーザが所属するグループ。|
 
 
-## 6. Endpoints
+## 6. エンドポイント
 ### a. GET /users/me
-This provides who is the authorized user with the current session.
-#### i. Request Parameters
-This needs **no** parameters.
-#### ii. Response
-This returns an `User` object of the current user.
+現在のセッションで承認されたユーザを返します。
+#### i. リクエストパラメータ
+パラメータは **不要** です。
+#### ii. レスポンス
+現在のユーザの `User`オブジェクトを返します。
 
-## 7. Notes
+## 7. 注釈
