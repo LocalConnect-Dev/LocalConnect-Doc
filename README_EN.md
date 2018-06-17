@@ -33,7 +33,8 @@ This shows the definition and the range of each types of values.
 
 |Type|Range|Description|
 |---|---|---|
-|uint|0 - 4,294,967,295|A **unsigned** numeric value that it can be placed on 32-bit area.|
+|uint|0 - 4,294,967,295|A **unsigned** 32-bit numeric value.|
+|ulong|0 - 18,446,744,073,709,551,615|A **unsigned** 64-bit numeric value.|
 |string|N/A|A string value that contains chars of Unicode.|
 
 ## 5. Objects
@@ -47,6 +48,7 @@ This shows a session.
 |---|---|---|
 |id|string|An UUID of the user.|
 |user|User|A user that has the session.|
+|created_at|ulong|A UNIX timestamp when the session created.|
 
 ### b. `User` Object
 This shows a user.
@@ -57,6 +59,7 @@ This shows a user.
 |name|string|A name of the user.|
 |type|UserType|The type of the user.|
 |group|Group|The group that the user belongs to.|
+|created_at|ulong|A UNIX timestamp when the user created.|
 
 ## 6. Endpoints
 
