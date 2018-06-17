@@ -15,7 +15,10 @@ This shows usage of the Local Connect API.
 ### a. Error Codes
 |Code|HTTP Status|Description|
 |---|---|---|
+|`NOT_AUTHORIZED`|401|When no session provided or the provided session is invalid.|
 |`ENDPOINT_NOT_FOUND`|404|When the specified API endpoint is not found.|
+|`TOKEN_NOT_FOUND`|404|When the provided token is invalid or expired.|
+|`USER_NOT_FOUND`|404|When the user of the specified UUID is not found.|
 
 ## 3. Authentification and Authorization
 - The user logs into the system with its token (may be as a QR code).
@@ -36,7 +39,16 @@ This shows the definition and the range of each types of values.
 ## 5. Objects
 The object shows a thing with member values.
 **Objects can be Types in JSON.**
-### a. `User` Object
+
+### a. `Session` Object
+This shows a session.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the user.|
+|user|User|A user that has the session.|
+
+### b. `User` Object
 This shows a user.
 
 |Member|Type|Description|
@@ -46,12 +58,35 @@ This shows a user.
 |type|UserType|The type of the user.|
 |group|Group|The group that the user belongs to.|
 
-
 ## 6. Endpoints
-### a. GET /users/me
-This provides who is the authorized user with the current session.
+
+### a. POST /sessions/create
+This creates a session from the token.
+This **doesn't need to authorize** .
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|token|string|A token to create the session.|
+
+#### ii. Response
+This returns the created `Session` object with `200 OK` status.
+
+### b. DELETE /sessions/destroy
+This destroys the session.
+
 #### i. Request Parameters
 This needs **no** parameters.
+
+#### ii. Response
+This returns only `204 No Content` status.
+
+### c. GET /users/me
+This provides who is the authorized user with the current session.
+
+#### i. Request Parameters
+This needs **no** parameters.
+
 #### ii. Response
 This returns an `User` object of the current user.
 
