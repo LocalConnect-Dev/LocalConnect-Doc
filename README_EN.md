@@ -41,7 +41,14 @@ This shows the definition and the range of each types of values.
 The object shows a thing with member values.
 **Objects can be Types in JSON.**
 
-### a. `Session` Object
+### a. `Error` Object
+This shows an error.
+
+|Member|Type|Description|
+|---|---|---|
+|error|string|An error code.|
+
+### b. `Session` Object
 This shows a session.
 
 |Member|Type|Description|
@@ -50,7 +57,7 @@ This shows a session.
 |user|User|A user that has the session.|
 |created_at|ulong|A UNIX timestamp when the session created.|
 
-### b. `User` Object
+### c. `User` Object
 This shows a user.
 
 |Member|Type|Description|
