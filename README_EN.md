@@ -71,6 +71,7 @@ This shows a user.
 ### d. `CreatedUser` Object
 This shows a created user.
 **This inherits `User` object** .
+
 |Member|Type|Description|
 |---|---|---|
 |token|string|A token of the created user.|
