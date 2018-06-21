@@ -68,6 +68,13 @@ This shows a user.
 |group|Group|The group that the user belongs to.|
 |created_at|ulong|A UNIX timestamp when the user created.|
 
+### d. `CreatedUser` Object
+This shows a created user.
+**This inherits `User` object** .
+|Member|Type|Description|
+|---|---|---|
+|token|string|A token of the created user.|
+
 ## 6. Endpoints
 
 ### a. POST /sessions/create
@@ -91,7 +98,23 @@ This needs **no** parameters.
 #### ii. Response
 This returns only `204 No Content` status.
 
-### c. GET /users/me
+### c. POST /users/create
+This creates a user.
+
+#### i. Request Parameters
+`region` or `group` is required.
+**`group` overrides `region`** .
+
+|Parameter|Type|Description|
+|---|---|---|
+|region|string|The UUID of the region that the user belongs to.|
+|group|string|The UUID of the group that the user belongs to.|
+|name|string|The name of the user.|
+
+#### ii. Response
+This returns `CreatedUser` object.
+
+### d. GET /users/me
 This provides who is the authorized user with the current session.
 
 #### i. Request Parameters
