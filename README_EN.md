@@ -48,16 +48,7 @@ This shows an error.
 |---|---|---|
 |error|string|An error code.|
 
-### b. `Session` Object
-This shows a session.
-
-|Member|Type|Description|
-|---|---|---|
-|id|string|An UUID of the user.|
-|user|User|A user that has the session.|
-|created_at|ulong|A UNIX timestamp when the session created.|
-
-### c. `User` Object
+### b. `User` Object
 This shows a user.
 
 |Member|Type|Description|
@@ -68,13 +59,34 @@ This shows a user.
 |group|Group|The group that the user belongs to.|
 |created_at|ulong|A UNIX timestamp when the user created.|
 
-### d. `CreatedUser` Object
+### c. `CreatedUser` Object
 This shows a created user.
 **This inherits `User` object** .
 
 |Member|Type|Description|
 |---|---|---|
 |token|string|A token of the created user.|
+
+### d. `Session` Object
+This shows a session.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the user.|
+|user|User|A user that has the session.|
+|created_at|ulong|A UNIX timestamp when the session created.|
+
+### e. `Profile` Object
+This shows a profile of a user.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the user.|
+|user|User|A user that has the profile.|
+|hobbies|string|Hobbies of the user. (Max. 512 chars)|
+|favorites|string|Favorite things of the user. (Max. 512 chars)|
+|mottoes|string|Mottoes of the user. (Max. 512 chars)|
+|updated_at|ulong|A UNIX timestamp when the profile last updated.|
 
 ## 6. Endpoints
 
