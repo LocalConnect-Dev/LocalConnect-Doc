@@ -136,4 +136,13 @@ This needs **no** parameters.
 #### ii. Response
 This returns an `User` object of the current user.
 
+### e. GET /profiles/me
+This provides a profile of the user who has the current session.
+
+#### i. Request Parameters
+This needs **no** parameters.
+
+#### ii. Response
+This returns an `Profile` object of the profile of the current user.
+
 ## 7. Notes
