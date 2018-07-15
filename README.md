@@ -464,10 +464,65 @@ This requires **write_documents** permission.
 |title|string|A title of the document.|
 |content|string|A content of the document.|
 
-#### ii. Response
-This returns the `Document` object that the user created or edited.
+### v. GET /boards/show
+This provides a board.
+This requires **read_boards** permission.
 
-### v. GET /profiles/mine
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|The UUID of the board to show.|
+
+#### ii. Response
+This returns an `Board` object.
+
+### w. GET /boards/reads
+This provides who read the board.
+This requires **read_boards** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|The UUID of the board to show read marks.|
+
+#### ii. Response
+This returns an array of `BoardRead` objects.
+
+### x. GET /boards/list
+This provides a list of boards of a group.
+This requires **read_boards** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|group|string|Optional. The UUID of the group to list boards. (Default: current group)|
+
+#### ii. Response
+This returns an array of `Board` objects.
+
+### y. POST /boards/read
+This mark a board read.
+This requires **read_boards** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|The UUID of the board to mark.|
+
+### z. POST /boards/create
+This creates or edits a board.
+This requires **write_boards** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|Optional. If this is provided, the user can edit the board.|
+|documents|string (comma-separated array)|UUIDs of documents that the board has.|
+
+#### ii. Response
+This returns the `Board` object that the user created or edited.
+
+### aa. GET /profiles/mine
 This provides a profile of the user who has the current session.
 
 #### i. Request Parameters
