@@ -28,16 +28,34 @@ This shows usage of the Local Connect API.
   At this time, the client gets restrictive permission (not permanently).
   Hereinafter, this is called **authorization** (authorizing).
 
-## 4. Types
+## 4. Permissions
+|Permission|Description|
+|---|---|
+|read_types|Whether the user can read permission types.|
+|read_boards|Whether the user can read boards.|
+|read_events|Whether the user can read events.|
+|read_posts|Whether the user can read posts.|
+|read_profiles|Whether the user can read profiles.|
+|write_types|Whether the user can create or edit permission types.|
+|write_regions|Whether the user can create or edit regions.|
+|write_groups|Whether the user can create or edit groups.|
+|write_users|Whether the user can create or edit users.|
+|write_boards|Whether the user can create or edit boards.|
+|write_events|Whether the user can create or edit events.|
+|write_posts|Whether the user can post.|
+|write_profiles|Whether the user can edit profiles.|
+
+## 5. Types
 This shows the definition and the range of each types of values.
 
 |Type|Range|Description|
 |---|---|---|
+|bool|0 - 1|A boolean value. Also can be showed as `true` or `false`.|
 |uint|0 - 4,294,967,295|A **unsigned** 32-bit numeric value.|
 |ulong|0 - 18,446,744,073,709,551,615|A **unsigned** 64-bit numeric value.|
 |string|N/A|A string value that contains chars of Unicode.|
 
-## 5. Objects
+## 6. Objects
 The object shows a thing with member values.
 **Objects can be Types in JSON.**
 
@@ -48,25 +66,14 @@ This shows an error.
 |---|---|---|
 |error|string|An error code.|
 
-### b. `UserType` Object
+### b. `PermissionType` Object
 This shows a permission type of users.
 
 |Member|Type|Description|
 |---|---|---|
 |id|string|An UUID of the type.|
 |name|string|A name of the type. (Max. 255 chars)|
-|read_boards|bool|Whether the user can read boards.|
-|read_events|bool|Whether the user can read events.|
-|read_posts|bool|Whether the user can read posts.|
-|read_profiles|bool|Whether the user can read profiles.|
-|write_types|bool|Whether the user can create or edit permission types.|
-|write_regions|bool|Whether the user can create or edit regions.|
-|write_groups|bool|Whether the user can create or edit groups.|
-|write_users|bool|Whether the user can create or edit users.|
-|write_boards|bool|Whether the user can create or edit boards.|
-|write_events|bool|Whether the user can create or edit events.|
-|write_posts|bool|Whether the user can post.|
-|write_profiles|bool|Whether the user can edit profiles.|
+|*(Permission)*|bool|Whether the type has the permission.|
 |created_at|ulong|A UNIX timestamp when the type created.|
 
 ### c. `Region` Object
@@ -200,9 +207,44 @@ This shows a profile of a user.
 |mottoes|string|Mottoes of the user. (Max. 512 chars)|
 |updated_at|ulong|A UNIX timestamp when the profile last updated.|
 
-## 6. Endpoints
+## 7. Endpoints
 
-### a. GET /sessions/current
+### a. GET /types/show
+This provides a permission type.
+This requires **read_types** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|The UUID of the type to show.|
+
+#### ii. Response
+This returns `PermissionType` object with `200 OK` status.
+
+### b. GET /types/list
+This provides a list of permission types.
+This requires **read_types** permission.
+
+#### i. Request Parameters
+This needs **no** parameters.
+
+#### ii. Response
+This returns an array of all permission types with `200 OK` status.
+
+### c. POST /types/create
+This creates or edits a permission type.
+This requires **write_types** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|Optional. If this is provided, the user can edit the type.|
+|*(Permission)*|bool|Whether the type has the permission. (Default: false, keep when editing)|
+
+#### ii. Response
+This returns the `PermissionType` object that the user created or edited.
+
+### d. GET /sessions/current
 This provides the current session.
 
 #### i. Request Parameters
@@ -211,28 +253,7 @@ This needs **no** parameters.
 #### ii. Response
 This returns the `Session` object of the current session with `200 OK` status.
 
-### b. POST /sessions/create
-This creates a session from the token.
-This **doesn't need to authorize** .
-
-#### i. Request Parameters
-|Parameter|Type|Description|
-|---|---|---|
-|token|string|A token to create the session.|
-
-#### ii. Response
-This returns the created `CreatedSession` object with `200 OK` status.
-
-### c. DELETE /sessions/destroy
-This destroys the session.
-
-#### i. Request Parameters
-This needs **no** parameters.
-
-#### ii. Response
-This returns only `204 No Content` status.
-
-### d. GET /users/me
+### e. GET /users/me
 This provides who is the authorized user with the current session.
 
 #### i. Request Parameters
@@ -241,7 +262,7 @@ This needs **no** parameters.
 #### ii. Response
 This returns an `User` object of the current user.
 
-### e. POST /users/create
+### f. POST /users/create
 This creates a user.
 
 #### i. Request Parameters
@@ -257,7 +278,28 @@ This creates a user.
 #### ii. Response
 This returns `CreatedUser` object.
 
-### f. GET /profiles/mine
+### g. POST /sessions/create
+This creates a session from the token.
+This **doesn't need to authorize** .
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|token|string|A token to create the session.|
+
+#### ii. Response
+This returns the created `CreatedSession` object with `200 OK` status.
+
+### h. DELETE /sessions/destroy
+This destroys the session.
+
+#### i. Request Parameters
+This needs **no** parameters.
+
+#### ii. Response
+This returns only `204 No Content` status.
+
+### i. GET /profiles/mine
 This provides a profile of the user who has the current session.
 
 #### i. Request Parameters
@@ -266,4 +308,4 @@ This needs **no** parameters.
 #### ii. Response
 This returns an `Profile` object of the profile of the current user.
 
-## 7. Notes
+## 8. Notes
