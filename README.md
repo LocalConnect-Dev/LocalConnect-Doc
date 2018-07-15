@@ -59,6 +59,7 @@ This shows a permission type of users.
 |read_events|bool|Whether the user can read events.|
 |read_posts|bool|Whether the user can read posts.|
 |read_profiles|bool|Whether the user can read profiles.|
+|write_types|bool|Whether the user can create or edit permission types.|
 |write_regions|bool|Whether the user can create or edit regions.|
 |write_groups|bool|Whether the user can create or edit groups.|
 |write_users|bool|Whether the user can create or edit users.|
