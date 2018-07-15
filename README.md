@@ -29,8 +29,8 @@ This shows usage of the Local Connect API.
   Hereinafter, this is called **authorization** (authorizing).
 
 ## 4. Permissions
-- If the user wants to read/write users of **another groups** , it **also need read/write_groups permission** .
-- If the user wants to read/write users or groups of **another regions** , it **also need read/write_regions permission** .
+- If the user wants to read/write (object of) users or of **another groups** , it **also need read/write_groups permission** .
+- If the user wants to read/write (object of) users or groups of **another regions** , it **also need read/write_regions permission** .
 
 |Permission|Description|
 |---|---|
@@ -39,6 +39,7 @@ This shows usage of the Local Connect API.
 |read_regions|Whether the user can read regions.|
 |read_groups|Whether the user can read groups.|
 |read_users|Whether the user can read users.|
+|read_documents|Whether the user can read documents.|
 |read_boards|Whether the user can read boards.|
 |read_events|Whether the user can read events.|
 |read_posts|Whether the user can read posts.|
@@ -46,6 +47,7 @@ This shows usage of the Local Connect API.
 |write_types|Whether the user can create or edit user types.|
 |write_regions|Whether the user can create or edit regions.|
 |write_groups|Whether the user can create or edit groups.|
+|write_documents|Whether the user can create or edit documents.|
 |write_users|Whether the user can create or edit users.|
 |write_boards|Whether the user can create or edit boards.|
 |write_events|Whether the user can create or edit events.|
@@ -389,7 +391,7 @@ This requires **write_users** permission.
 #### i. Request Parameters
 |Parameter|Type|Description|
 |---|---|---|
-|id|string|Optional. If this is provided, the user can edit the region.|
+|id|string|Optional. If this is provided, it can edit the user.|
 |name|string|The name of the user.|
 |type|string|The UUID of the user type.|
 |group|string|The UUID of the group that the user belongs to.|
@@ -427,7 +429,45 @@ This needs **no** parameters.
 #### ii. Response
 This returns only `204 No Content` status.
 
-### s. GET /profiles/mine
+### s. GET /documents/show
+This provides a document.
+This requires **read_documents** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|The UUID of the document to show.|
+
+#### ii. Response
+This returns an `Document` object.
+
+### t. GET /documents/list
+This provides a list of documents of a user.
+This requires **read_documents** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|user|string|Optional. The UUID of the user to list documents. (Default: current user)|
+
+#### ii. Response
+This returns an array of `Document` objects.
+
+### u. POST /documents/create
+This creates or edits a document.
+This requires **write_documents** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|Optional. If this is provided, the user can edit the document.|
+|title|string|A title of the document.|
+|content|string|A content of the document.|
+
+#### ii. Response
+This returns the `Document` object that the user created or edited.
+
+### v. GET /profiles/mine
 This provides a profile of the user who has the current session.
 
 #### i. Request Parameters
