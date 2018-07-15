@@ -600,7 +600,80 @@ This requires **write_events** permission.
 #### ii. Response
 This returns the `Event` object that the user created or edited.
 
-### ae. GET /profiles/mine
+### af. GET /posts/show
+This provides a post.
+This requires **read_posts** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|The UUID of the post to show.|
+
+#### ii. Response
+This returns an `Post` object.
+
+### ag. GET /posts/likes
+This provides who liked the post.
+This requires **read_posts** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|The UUID of the post to show the reactions.|
+
+#### ii. Response
+This returns an array of `PostLike` objects.
+
+### ah. GET /posts/list_user
+This provides a list of posts of a user.
+This requires **read_posts** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|user|string|Optional. The UUID of the user to list posts. (Default: current user)|
+
+#### ii. Response
+This returns an array of `Post` objects.
+
+### ai. GET /posts/list_group
+This provides a list of posts of a user.
+This requires **read_posts** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|group|string|Optional. The UUID of the group to list posts. (Default: current group)|
+
+#### ii. Response
+This returns an array of `Post` objects.
+
+### aj. POST /posts/like
+This likes a post.
+This requires **read_posts** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|post|string|The UUID of the post to like.|
+
+#### ii. Response
+This returns a `PostLike` object that the user reacted.
+
+### ak. POST /posts/create
+This creates or edits a post.
+This requires **write_posts** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|Optional. If this is provided, the user can edit the post.|
+|document|string|The UUID of the document of the post.|
+
+#### ii. Response
+This returns the `Post` object that the user created or edited.
+
+### al. GET /profiles/mine
 This provides a profile of the user who has the current session.
 
 #### i. Request Parameters
