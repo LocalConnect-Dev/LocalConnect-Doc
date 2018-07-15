@@ -56,7 +56,17 @@ This shows a permission type of users.
 |id|string|An UUID of the type.|
 |name|string|A name of the type. (Max. 255 chars)|
 |read_boards|bool|Whether the user can read boards.|
+|read_events|bool|Whether the user can read events.|
+|read_posts|bool|Whether the user can read posts.|
+|read_profiles|bool|Whether the user can read profiles.|
+|write_regions|bool|Whether the user can create or edit regions.|
+|write_groups|bool|Whether the user can create or edit groups.|
+|write_users|bool|Whether the user can create or edit users.|
 |write_boards|bool|Whether the user can create or edit boards.|
+|write_events|bool|Whether the user can create or edit events.|
+|write_posts|bool|Whether the user can post.|
+|write_profiles|bool|Whether the user can edit profiles.|
+
 |created_at|ulong|A UNIX timestamp when the type created.|
 
 ### c. `Region` Object
