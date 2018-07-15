@@ -682,4 +682,42 @@ This needs **no** parameters.
 #### ii. Response
 This returns an `Profile` object of the profile of the current user.
 
+### am. GET /profiles/show
+This provides a profile.
+This requires **read_profiles** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|The UUID of the profile to show.|
+
+#### ii. Response
+This returns an `Profile` object.
+
+### an. GET /profiles/lookup
+This provides a profile of a user.
+This requires **read_profiles** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|user|string|The UUID of the user to show the profile.|
+
+#### ii. Response
+This returns an `Profile` object.
+
+### ao. POST /profiles/create
+This creates or edits a profile of the current user.
+This requires **write_posts** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|hobbies|string|Hobbies of the user. (Max. 512 chars)|
+|favorites|string|Favorite things of the user. (Max. 512 chars)|
+|mottoes|string|Mottoes of the user. (Max. 512 chars)|
+
+#### ii. Response
+This returns the `Profile` object that the user created or edited.
+
 ## 8. Notes
