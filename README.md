@@ -76,7 +76,15 @@ This shows a session.
 |user|User|A user that has the session.|
 |created_at|ulong|A UNIX timestamp when the session created.|
 
-### e. `Profile` Object
+### e. `CreatedSession` Object
+This shows a created session.
+**This inherits `Session` object** .
+
+|Member|Type|Description|
+|---|---|---|
+|secret|string|A secret of the created session.|
+
+### f. `Profile` Object
 This shows a profile of a user.
 
 |Member|Type|Description|
