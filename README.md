@@ -193,12 +193,12 @@ This shows a event.
 |date|ulong|A UNIX timestamp when the event will start.|
 |created_at|ulong|A UNIX timestamp when the event created.|
 
-### n. `EventAttendee` Object
-This shows a attendee of a event.
+### n. `EventAttendance` Object
+This shows a attendance of a event and a user.
 
 |Member|Type|Description|
 |---|---|---|
-|id|string|An UUID of the attendee.|
+|id|string|An UUID of the attendance.|
 |user|User|A user of the attendee.|
 |event|Event|A event that the attendee joins.|
 |created_at|ulong|A UNIX timestamp when the attendee decided to join.|
@@ -520,7 +520,7 @@ This requires **read_boards** permission.
 #### i. Request Parameters
 |Parameter|Type|Description|
 |---|---|---|
-|id|string|The UUID of the board to mark.|
+|board|string|The UUID of the board to mark.|
 
 #### ii. Response
 This returns a `BoardRead` object that the user marked.
@@ -538,7 +538,69 @@ This requires **write_boards** permission.
 #### ii. Response
 This returns the `Board` object that the user created or edited.
 
-### aa. GET /profiles/mine
+### aa. GET /events/show
+This provides a event.
+This requires **read_events** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|The UUID of the event to show.|
+
+#### ii. Response
+This returns an `Event` object.
+
+### ab. GET /events/list_user
+This provides a list of events that a user hold.
+This requires **read_events** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|user|string|Optional. The UUID of the user to list events. (Default: current user)|
+
+#### ii. Response
+This returns an array of `Event` objects.
+
+### ac. GET /events/list_group
+This provides a list of events of a group.
+This requires **read_events** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|group|string|Optional. The UUID of the group to list events. (Default: the group of current user)|
+
+#### ii. Response
+This returns an array of `Event` objects.
+
+### ad. POST /events/join
+This creates attendance of a event and a user.
+This requires **read_events** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|event|string|The UUID of the event to mark.|
+
+#### ii. Response
+This returns the `EventAttendance` object.
+
+### ae. POST /events/create
+This creates or edits a event.
+This requires **write_events** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|Optional. If this is provided, the user can edit the event.|
+|document|string|The UUID of the document that is explained the event.|
+|date|ulong|A UNIX timestamp when the event will start.|
+
+#### ii. Response
+This returns the `Event` object that the user created or edited.
+
+### ae. GET /profiles/mine
 This provides a profile of the user who has the current session.
 
 #### i. Request Parameters
