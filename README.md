@@ -32,6 +32,8 @@ This shows usage of the Local Connect API.
 |Permission|Description|
 |---|---|
 |read_types|Whether the user can read permission types.|
+|read_regions|Whether the user can read regions.|
+|read_groups|Whether the user can read groups.|
 |read_boards|Whether the user can read boards.|
 |read_events|Whether the user can read events.|
 |read_posts|Whether the user can read posts.|
@@ -219,7 +221,7 @@ This requires **read_types** permission.
 |id|string|The UUID of the type to show.|
 
 #### ii. Response
-This returns `PermissionType` object with `200 OK` status.
+This returns a `PermissionType` object.
 
 ### b. GET /types/list
 This provides a list of permission types.
@@ -229,7 +231,7 @@ This requires **read_types** permission.
 This needs **no** parameters.
 
 #### ii. Response
-This returns an array of all permission types with `200 OK` status.
+This returns an array of `PermissionType` objects.
 
 ### c. POST /types/create
 This creates or edits a permission type.
@@ -243,6 +245,77 @@ This requires **write_types** permission.
 
 #### ii. Response
 This returns the `PermissionType` object that the user created or edited.
+
+### d. GET /regions/show
+This provides a region.
+This requires **read_regions** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|The UUID of the region to show.|
+
+#### ii. Response
+This returns a `Region` object.
+
+### e. GET /regions/list
+This provides a list of regions.
+This requires **read_regions** permission.
+
+#### i. Request Parameters
+This needs **no** parameters.
+
+#### ii. Response
+This returns an array of `Region` objects.
+
+### f. POST /regions/create
+This creates or edits a region.
+This requires **write_regions** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|Optional. If this is provided, the user can edit the region.|
+|name|string|A name of the region.|
+
+### g. GET /groups/show
+This provides a group.
+This requires **read_groups** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|The UUID of the group to show.|
+
+#### ii. Response
+This returns a `Group` object.
+
+### h. GET /groups/list
+This provides a list of groups in a region.
+This requires **read_groups** permission.
+If `region` parameter is not equals to the current region,
+it also requires **read_regions** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|region|string|Optional. The UUID of the region to list groups. (Default: the region of current user)|
+
+#### ii. Response
+This returns an array of `Group` objects.
+
+### i. POST /groups/create
+This creates or edits a group.
+This requires **write_groups** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|Optional. If this is provided, the user can edit the group.|
+|name|string|A name of the group.|
+
+#### ii. Response
+This returns the `Group` object that the user created or edited.
 
 ### d. GET /sessions/current
 This provides the current session.
