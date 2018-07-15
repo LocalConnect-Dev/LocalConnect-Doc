@@ -48,18 +48,48 @@ This shows an error.
 |---|---|---|
 |error|string|An error code.|
 
-### b. `User` Object
+### b. `UserType` Object
+This shows a permission type of users.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the type.|
+|name|string|A name of the type. (Max. 255 chars)|
+|read_boards|bool|Whether the user can read boards.|
+|write_boards|bool|Whether the user can create or edit boards.|
+|created_at|ulong|A UNIX timestamp when the type created.|
+
+### c. `Region` Object
+This shows a region that has groups.
+
+|Member|Type|Description|
+|---|---|---|
+|id|An UUID of the region.|
+|name|A name of the region. (Max. 255 chars)|
+|created_at|ulong|A UNIX timestamp when the region created.|
+
+### d. `Group` Object
+This shows a group in a region that has users.
+
+|Member|Type|Description|
+|---|---|---|
+|id|An UUID of the group.|
+|region|Region|A region that the group is in.|
+|name|A name of the group. (Max. 255 chars)|
+|created_at|ulong|A UNIX timestamp when the group created.|
+
+### e. `User` Object
 This shows a user.
 
 |Member|Type|Description|
 |---|---|---|
 |id|string|A unique identifier (hereinafter, this is called **an UUID**) of the user.|
-|name|string|A name of the user.|
+|name|string|A name of the user. (Max. 255 chars)|
 |type|UserType|The type of the user.|
 |group|Group|The group that the user belongs to.|
 |created_at|ulong|A UNIX timestamp when the user created.|
 
-### c. `CreatedUser` Object
+### f. `CreatedUser` Object
 This shows a created user.
 **This inherits `User` object** .
 
@@ -67,7 +97,7 @@ This shows a created user.
 |---|---|---|
 |token|string|A token of the created user.|
 
-### d. `Session` Object
+### g. `Session` Object
 This shows a session.
 
 |Member|Type|Description|
@@ -76,7 +106,7 @@ This shows a session.
 |user|User|A user that has the session.|
 |created_at|ulong|A UNIX timestamp when the session created.|
 
-### e. `CreatedSession` Object
+### h. `CreatedSession` Object
 This shows a created session.
 **This inherits `Session` object** .
 
@@ -84,7 +114,71 @@ This shows a created session.
 |---|---|---|
 |secret|string|A secret of the created session.|
 
-### f. `Profile` Object
+
+### i. `Document` Object
+This shows a universal documentation.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the document.|
+|author|User|A user who created the document.|
+|title|string|Title of the document. (Max. 512 chars)|
+|content|string|Content of the document.|
+|created_at|ulong|A UNIX timestamp when the document created.|
+
+### j. `Board` Object
+This shows a bulletin board.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID for the board.|
+|group|Group|A group that the board provided in.|
+|documents|Document[]|Array of documents in the board.|
+|created_at|ulong|A UNIX timestamp when the board created.|
+
+
+### k. `BoardRead` Object
+This shows a user-read mark of a board.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the mark.|
+|user|User|A user who read the board.|
+|board|Board|A board that the user read.|
+|created_at|ulong|A UNIX timestamp when the user read the board.|
+
+### l. `Event` Object
+This shows a event.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the event.|
+|author|User|A user who created the event.|
+|document|Document|A document that is described the event.|
+|date|ulong|A UNIX timestamp when the event will start.|
+|created_at|ulong|A UNIX timestamp when the event created.|
+
+### m. `Post` Object
+This shows a user post.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the post.|
+|author|User|A user who posted.|
+|document|Document|A document of the content of the post.|
+|created_at|ulong|A UNIX timestamp when the post created.|
+
+### n. `PostLike` Object
+This shows a "Like!" reaction of a post.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the reaction.|
+|user|User|A user who liked.|
+|post|Post|A board that the user liked.|
+|created_at|ulong|A UNIX timestamp when the user liked the post.|
+
+### o. `Profile` Object
 This shows a profile of a user.
 
 |Member|Type|Description|
