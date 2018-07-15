@@ -193,7 +193,17 @@ This shows a event.
 |date|ulong|A UNIX timestamp when the event will start.|
 |created_at|ulong|A UNIX timestamp when the event created.|
 
-### n. `Post` Object
+### n. `EventAttendee` Object
+This shows a attendee of a event.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the attendee.|
+|user|User|A user of the attendee.|
+|event|Event|A event that the attendee joins.|
+|created_at|ulong|A UNIX timestamp when the attendee decided to join.|
+
+### o. `Post` Object
 This shows a user post.
 
 |Member|Type|Description|
@@ -203,7 +213,7 @@ This shows a user post.
 |document|Document|A document of the content of the post.|
 |created_at|ulong|A UNIX timestamp when the post created.|
 
-### o. `PostLike` Object
+### p. `PostLike` Object
 This shows a "Like!" reaction of a post.
 
 |Member|Type|Description|
@@ -213,7 +223,7 @@ This shows a "Like!" reaction of a post.
 |post|Post|A board that the user liked.|
 |created_at|ulong|A UNIX timestamp when the user liked the post.|
 
-### p. `Profile` Object
+### q. `Profile` Object
 This shows a profile of a user.
 
 |Member|Type|Description|
