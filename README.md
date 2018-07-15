@@ -29,17 +29,21 @@ This shows usage of the Local Connect API.
   Hereinafter, this is called **authorization** (authorizing).
 
 ## 4. Permissions
+- If the user wants to read/write users of **another groups** , it **also need read/write_groups permission** .
+- If the user wants to read/write users or groups of **another regions** , it **also need read/write_regions permission** .
+
 |Permission|Description|
 |---|---|
 |read_permissions|Whether the user can read permissions.|
 |read_types|Whether the user can read user types.|
 |read_regions|Whether the user can read regions.|
 |read_groups|Whether the user can read groups.|
+|read_users|Whether the user can read users.|
 |read_boards|Whether the user can read boards.|
 |read_events|Whether the user can read events.|
 |read_posts|Whether the user can read posts.|
 |read_profiles|Whether the user can read profiles.|
-|write_types|Whether the user can create or edit permission types.|
+|write_types|Whether the user can create or edit user types.|
 |write_regions|Whether the user can create or edit regions.|
 |write_groups|Whether the user can create or edit groups.|
 |write_users|Whether the user can create or edit users.|
@@ -323,8 +327,6 @@ This returns a `Group` object.
 ### j. GET /groups/list
 This provides a list of groups in a region.
 This requires **read_groups** permission.
-If `region` parameter is not equals to the current region,
-it also requires **read_regions** permission.
 
 #### i. Request Parameters
 |Parameter|Type|Description|
@@ -347,16 +349,7 @@ This requires **write_groups** permission.
 #### ii. Response
 This returns the `Group` object that the user created or edited.
 
-### l. GET /sessions/current
-This provides the current session.
-
-#### i. Request Parameters
-This needs **no** parameters.
-
-#### ii. Response
-This returns the `Session` object of the current session with `200 OK` status.
-
-### m. GET /users/me
+### l. GET /users/me
 This provides who is the authorized user with the current session.
 
 #### i. Request Parameters
@@ -365,23 +358,55 @@ This needs **no** parameters.
 #### ii. Response
 This returns an `User` object of the current user.
 
-### n. POST /users/create
-This creates a user.
+### m. GET /users/show
+This provides a user.
+This requires **read_users** permission.
 
 #### i. Request Parameters
-`region` or `group` is required.
-**`group` overrides `region`** .
-
 |Parameter|Type|Description|
 |---|---|---|
-|region|string|The UUID of the region that the user belongs to.|
-|group|string|The UUID of the group that the user belongs to.|
-|name|string|The name of the user.|
+|id|string|The UUID of the user to show.|
 
 #### ii. Response
-This returns `CreatedUser` object.
+This returns an `User` object.
 
-### o. POST /sessions/create
+### n. GET /users/list
+This provides a list of users in a group.
+This requires **read_users** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|group|string|Optional. The UUID of the group to list users. (Default: the group of current user)|
+
+#### ii. Response
+This returns an array of `User` objects.
+
+### o. POST /users/create
+This creates or edits a user.
+This requires **write_users** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|Optional. If this is provided, the user can edit the region.|
+|name|string|The name of the user.|
+|type|string|The UUID of the user type.|
+|group|string|The UUID of the group that the user belongs to.|
+
+#### ii. Response
+This returns the `CreatedUser` object that the user created or edited.
+
+### p. GET /sessions/current
+This provides the current session.
+
+#### i. Request Parameters
+This needs **no** parameters.
+
+#### ii. Response
+This returns the `Session` object of the current session with `200 OK` status.
+
+### q. POST /sessions/create
 This creates a session from the token.
 This **doesn't need to authorize** .
 
@@ -393,7 +418,7 @@ This **doesn't need to authorize** .
 #### ii. Response
 This returns the created `CreatedSession` object with `200 OK` status.
 
-### p. DELETE /sessions/destroy
+### r. DELETE /sessions/destroy
 This destroys the session.
 
 #### i. Request Parameters
@@ -402,7 +427,7 @@ This needs **no** parameters.
 #### ii. Response
 This returns only `204 No Content` status.
 
-### q. GET /profiles/mine
+### s. GET /profiles/mine
 This provides a profile of the user who has the current session.
 
 #### i. Request Parameters
