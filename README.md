@@ -108,7 +108,7 @@ This **doesn't need to authorize** .
 |token|string|A token to create the session.|
 
 #### ii. Response
-This returns the created `Session` object with `200 OK` status.
+This returns the created `CreatedSession` object with `200 OK` status.
 
 ### b. DELETE /sessions/destroy
 This destroys the session.
@@ -119,7 +119,16 @@ This needs **no** parameters.
 #### ii. Response
 This returns only `204 No Content` status.
 
-### c. POST /users/create
+### c. GET /users/me
+This provides who is the authorized user with the current session.
+
+#### i. Request Parameters
+This needs **no** parameters.
+
+#### ii. Response
+This returns an `User` object of the current user.
+
+### d. POST /users/create
 This creates a user.
 
 #### i. Request Parameters
@@ -135,16 +144,7 @@ This creates a user.
 #### ii. Response
 This returns `CreatedUser` object.
 
-### d. GET /users/me
-This provides who is the authorized user with the current session.
-
-#### i. Request Parameters
-This needs **no** parameters.
-
-#### ii. Response
-This returns an `User` object of the current user.
-
-### e. GET /profiles/me
+### e. GET /profiles/mine
 This provides a profile of the user who has the current session.
 
 #### i. Request Parameters
