@@ -474,6 +474,9 @@ This requires **write_documents** permission.
 |title|string|A title of the document.|
 |content|string|A content of the document.|
 
+#### ii. Response
+This returns the `Document` object that the user created or edited.
+
 ### v. GET /boards/show
 This provides a board.
 This requires **read_boards** permission.
@@ -518,6 +521,9 @@ This requires **read_boards** permission.
 |Parameter|Type|Description|
 |---|---|---|
 |id|string|The UUID of the board to mark.|
+
+#### ii. Response
+This returns a `BoardRead` object that the user marked.
 
 ### z. POST /boards/create
 This creates or edits a board.
