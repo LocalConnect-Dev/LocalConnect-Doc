@@ -66,7 +66,6 @@ This shows a permission type of users.
 |write_events|bool|Whether the user can create or edit events.|
 |write_posts|bool|Whether the user can post.|
 |write_profiles|bool|Whether the user can edit profiles.|
-
 |created_at|ulong|A UNIX timestamp when the type created.|
 
 ### c. `Region` Object
