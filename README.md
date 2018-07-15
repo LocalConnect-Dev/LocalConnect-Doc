@@ -1,103 +1,148 @@
-# Local Connect -  API ドキュメント
-Local Connect API の使用方法を示します。
+# Local Connect -  API Document
+This shows usage of the Local Connect API.
 
-## 1. リクエストとレスポンス
-- クライアントはサーバへリクエストを `application/www-form-urlencoded` 形式で送信します。
-  リクエストは `HTTP/1.1` プロトコルに基づいたパラメータ及びヘッダを持ちます。
-- サーバがリクエストを処理した後、サーバはクライアントへレスポンスを `application/json` 形式で返します。
-  JSON形式の詳細は、 `RFC4627` 規格をご覧ください。  
+## 1. Request and Response
+- The client sends a request to the server with `application/www-form-urlencoded` type.
+  The requests have parameters and headers according to the `HTTP/1.1` protocol.
+- After the server proceeded the request, the server returns responses to the client with `application/json` type.
+  For details, see the `RFC4627` standard.  
   [http://www.ietf.org/rfc/rfc4627](http://www.ietf.org/rfc/rfc4627)
 
-## 2. エラー
-- サーバがリクエストの処理に失敗したとき、サーバは `Error` オブジェクトを返します。
-  詳細は、後述する 5. オブジェクト の `Error` オブジェクトをご覧ください。
+## 2. Error
+- When the server failed to proceed the request, it returns an error with the `Error` object.
+  For details, see the specification of the object below.
 
-### a. エラーコードの一覧
-|コード|HTTP ステータス|説明|
+### a. Error Codes
+|Code|HTTP Status|Description|
 |---|---|---|
-|`NOT_AUTHORIZED`|401|ヘッダで指定されたセッションが正しくない、またはセッションが指定されていないとき。|
-|`ENDPOINT_NOT_FOUND`|404|リクエストされた API エンドポイントが存在しないとき。|
-|`TOKEN_NOT_FOUND`|404|指定されたトークンが正しくないまたは期限切れのとき。|
-|`USER_NOT_FOUND`|404|指定されたUUIDのユーザが存在しないとき。|
+|`NOT_AUTHORIZED`|401|When no session provided or the provided session is invalid.|
+|`ENDPOINT_NOT_FOUND`|404|When the specified API endpoint is not found.|
+|`TOKEN_NOT_FOUND`|404|When the provided token is invalid or expired.|
+|`USER_NOT_FOUND`|404|When the user of the specified UUID is not found.|
 
-## 3. 認証と承認
-- ユーザはQRコードなどで示されたトークンを用いて、システムにログインします。
-  このとき、サーバはクライアントにセッションを付与します。
-  これを **認証** (Authentification) と呼びます。
-- ユーザがログインした後、クライアントがAPIを使用するとき、クライアントはリクエストを `X-LocalConnect-Session` ヘッダにセッションを含めて作成します。
-  このとき、クライアントは永続的でない限定的な権限を持ちます。
-  これを **承認** (Authorization) と呼びます。
+## 3. Authentification and Authorization
+- The user logs into the system with its token (may be as a QR code).
+  At this time, the server provides a session to the client.
+  Hereinafter, this is called **authentification** (authentificating).
+- After the user logged in, when the client uses the API, the client creates a request with `X-LocalConnect-Session` header includes the session.
+  At this time, the client gets restrictive permission (not permanently).
+  Hereinafter, this is called **authorization** (authorizing).
 
-## 4. 型
-それぞれの値の種類について、定義と取り得る値の範囲を示します。
+## 4. Types
+This shows the definition and the range of each types of values.
 
-|型|範囲|説明|
+|Type|Range|Description|
 |---|---|---|
-|uint|0 - 4,294,967,295|32ビットで表される **0以上の** 数値。|
-|ulong|0 - 18,446,744,073,709,551,615|64ビットで表される **0以上の** 数値。|
-|string|N/A|Unicode文字で表される文字列。|
+|uint|0 - 4,294,967,295|A **unsigned** 32-bit numeric value.|
+|ulong|0 - 18,446,744,073,709,551,615|A **unsigned** 64-bit numeric value.|
+|string|N/A|A string value that contains chars of Unicode.|
 
-## 5. オブジェクト
-メンバ値を持って、ある物を表現します。
-**JSON オブジェクト内では、オブジェクトも型となります。**
+## 5. Objects
+The object shows a thing with member values.
+**Objects can be Types in JSON.**
 
 ### a. `Error` Object
-エラーを示します。
+This shows an error.
 
-|メンバ|型|説明|
+|Member|Type|Description|
 |---|---|---|
-|error|string|エラーコード。|
+|error|string|An error code.|
 
-### b. `Session` オブジェクト
-セッションを示します。
+### b. `User` Object
+This shows a user.
 
-|メンバ|型|説明|
+|Member|Type|Description|
 |---|---|---|
-|id|string|セッションのUUID。|
-|user|User|セッションを持つユーザ。|
-|created_at|ulong|セッションが作成されたときのUNIXタイムスタンプ。|
+|id|string|A unique identifier (hereinafter, this is called **an UUID**) of the user.|
+|name|string|A name of the user.|
+|type|UserType|The type of the user.|
+|group|Group|The group that the user belongs to.|
+|created_at|ulong|A UNIX timestamp when the user created.|
 
-### c. `User` オブジェクト
-ユーザを示します。
+### c. `CreatedUser` Object
+This shows a created user.
+**This inherits `User` object** .
 
-|メンバ|型|説明|
+|Member|Type|Description|
 |---|---|---|
-|id|string|ユーザ固有の識別子 (**UUID** といいます) 。|
-|name|string|ユーザの名前。|
-|type|UserType|ユーザの種類。|
-|group|Group|ユーザが所属するグループ。|
-|created_at|ulong|ユーザが作成されたときのUNIXタイムスタンプ。|
+|token|string|A token of the created user.|
 
-## 6. エンドポイント
+### d. `Session` Object
+This shows a session.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the user.|
+|user|User|A user that has the session.|
+|created_at|ulong|A UNIX timestamp when the session created.|
+
+### e. `Profile` Object
+This shows a profile of a user.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the user.|
+|user|User|A user that has the profile.|
+|hobbies|string|Hobbies of the user. (Max. 512 chars)|
+|favorites|string|Favorite things of the user. (Max. 512 chars)|
+|mottoes|string|Mottoes of the user. (Max. 512 chars)|
+|updated_at|ulong|A UNIX timestamp when the profile last updated.|
+
+## 6. Endpoints
 
 ### a. POST /sessions/create
-トークンからセッションを作成します。
-**承認は必要ありません** 。
+This creates a session from the token.
+This **doesn't need to authorize** .
 
-#### i. リクエストパラメータ
-|パラメータ|型|説明|
+#### i. Request Parameters
+|Parameter|Type|Description|
 |---|---|---|
-|token|string|セッションを作成するためのトークン。|
+|token|string|A token to create the session.|
 
-#### ii. レスポンス
-作成された `Session` オブジェクト及び `200 OK` ステータスを返します。
+#### ii. Response
+This returns the created `Session` object with `200 OK` status.
 
 ### b. DELETE /sessions/destroy
-セッションを破棄します。
+This destroys the session.
 
-#### i. リクエストパラメータ
-パラメータは **不要** です。
+#### i. Request Parameters
+This needs **no** parameters.
 
-#### ii. レスポンス
-`204 No Content` ステータスのみを返します。
+#### ii. Response
+This returns only `204 No Content` status.
 
-### a. GET /users/me
-現在のセッションで承認されたユーザを返します。
+### c. POST /users/create
+This creates a user.
 
-#### i. リクエストパラメータ
-パラメータは **不要** です。
+#### i. Request Parameters
+`region` or `group` is required.
+**`group` overrides `region`** .
 
-#### ii. レスポンス
-現在のユーザの `User`オブジェクトを返します。
+|Parameter|Type|Description|
+|---|---|---|
+|region|string|The UUID of the region that the user belongs to.|
+|group|string|The UUID of the group that the user belongs to.|
+|name|string|The name of the user.|
 
-## 7. 注釈
+#### ii. Response
+This returns `CreatedUser` object.
+
+### d. GET /users/me
+This provides who is the authorized user with the current session.
+
+#### i. Request Parameters
+This needs **no** parameters.
+
+#### ii. Response
+This returns an `User` object of the current user.
+
+### e. GET /profiles/me
+This provides a profile of the user who has the current session.
+
+#### i. Request Parameters
+This needs **no** parameters.
+
+#### ii. Response
+This returns an `Profile` object of the profile of the current user.
+
+## 7. Notes
