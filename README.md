@@ -98,7 +98,16 @@ This shows a profile of a user.
 
 ## 6. Endpoints
 
-### a. POST /sessions/create
+### a. GET /sessions/current
+This provides the current session.
+
+#### i. Request Parameters
+This needs **no** parameters.
+
+#### ii. Response
+This returns the `Session` object of the current session with `200 OK` status.
+
+### b. POST /sessions/create
 This creates a session from the token.
 This **doesn't need to authorize** .
 
@@ -110,7 +119,7 @@ This **doesn't need to authorize** .
 #### ii. Response
 This returns the created `CreatedSession` object with `200 OK` status.
 
-### b. DELETE /sessions/destroy
+### c. DELETE /sessions/destroy
 This destroys the session.
 
 #### i. Request Parameters
@@ -119,7 +128,7 @@ This needs **no** parameters.
 #### ii. Response
 This returns only `204 No Content` status.
 
-### c. GET /users/me
+### d. GET /users/me
 This provides who is the authorized user with the current session.
 
 #### i. Request Parameters
@@ -128,7 +137,7 @@ This needs **no** parameters.
 #### ii. Response
 This returns an `User` object of the current user.
 
-### d. POST /users/create
+### e. POST /users/create
 This creates a user.
 
 #### i. Request Parameters
@@ -144,7 +153,7 @@ This creates a user.
 #### ii. Response
 This returns `CreatedUser` object.
 
-### e. GET /profiles/mine
+### f. GET /profiles/mine
 This provides a profile of the user who has the current session.
 
 #### i. Request Parameters
