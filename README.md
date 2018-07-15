@@ -31,7 +31,8 @@ This shows usage of the Local Connect API.
 ## 4. Permissions
 |Permission|Description|
 |---|---|
-|read_types|Whether the user can read permission types.|
+|read_permissions|Whether the user can read permissions.|
+|read_types|Whether the user can read user types.|
 |read_regions|Whether the user can read regions.|
 |read_groups|Whether the user can read groups.|
 |read_boards|Whether the user can read boards.|
@@ -68,17 +69,26 @@ This shows an error.
 |---|---|---|
 |error|string|An error code.|
 
-### b. `PermissionType` Object
-This shows a permission type of users.
+### b. `Permission` object
+This shows a permission.
+it is a **read-only** object.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the permission.|
+|name|string|A name of the permission.|
+
+### c. `UserType` Object
+This shows a type of users.
 
 |Member|Type|Description|
 |---|---|---|
 |id|string|An UUID of the type.|
 |name|string|A name of the type. (Max. 255 chars)|
-|*(Permission)*|bool|Whether the type has the permission.|
+|permissions|Permission[]|An array of permissions that the user has.|
 |created_at|ulong|A UNIX timestamp when the type created.|
 
-### c. `Region` Object
+### d. `Region` Object
 This shows a region that has groups.
 
 |Member|Type|Description|
@@ -87,7 +97,7 @@ This shows a region that has groups.
 |name|A name of the region. (Max. 255 chars)|
 |created_at|ulong|A UNIX timestamp when the region created.|
 
-### d. `Group` Object
+### e. `Group` Object
 This shows a group in a region that has users.
 
 |Member|Type|Description|
@@ -97,7 +107,7 @@ This shows a group in a region that has users.
 |name|A name of the group. (Max. 255 chars)|
 |created_at|ulong|A UNIX timestamp when the group created.|
 
-### e. `User` Object
+### f. `User` Object
 This shows a user.
 
 |Member|Type|Description|
@@ -108,7 +118,7 @@ This shows a user.
 |group|Group|The group that the user belongs to.|
 |created_at|ulong|A UNIX timestamp when the user created.|
 
-### f. `CreatedUser` Object
+### g. `CreatedUser` Object
 This shows a created user.
 **This inherits `User` object** .
 
@@ -116,7 +126,7 @@ This shows a created user.
 |---|---|---|
 |token|string|A token of the created user.|
 
-### g. `Session` Object
+### h. `Session` Object
 This shows a session.
 
 |Member|Type|Description|
@@ -125,7 +135,7 @@ This shows a session.
 |user|User|A user that has the session.|
 |created_at|ulong|A UNIX timestamp when the session created.|
 
-### h. `CreatedSession` Object
+### i. `CreatedSession` Object
 This shows a created session.
 **This inherits `Session` object** .
 
@@ -134,7 +144,7 @@ This shows a created session.
 |secret|string|A secret of the created session.|
 
 
-### i. `Document` Object
+### j. `Document` Object
 This shows a universal documentation.
 
 |Member|Type|Description|
@@ -145,7 +155,7 @@ This shows a universal documentation.
 |content|string|Content of the document.|
 |created_at|ulong|A UNIX timestamp when the document created.|
 
-### j. `Board` Object
+### k. `Board` Object
 This shows a bulletin board.
 
 |Member|Type|Description|
@@ -156,7 +166,7 @@ This shows a bulletin board.
 |created_at|ulong|A UNIX timestamp when the board created.|
 
 
-### k. `BoardRead` Object
+### l. `BoardRead` Object
 This shows a user-read mark of a board.
 
 |Member|Type|Description|
@@ -166,7 +176,7 @@ This shows a user-read mark of a board.
 |board|Board|A board that the user read.|
 |created_at|ulong|A UNIX timestamp when the user read the board.|
 
-### l. `Event` Object
+### m. `Event` Object
 This shows a event.
 
 |Member|Type|Description|
@@ -177,7 +187,7 @@ This shows a event.
 |date|ulong|A UNIX timestamp when the event will start.|
 |created_at|ulong|A UNIX timestamp when the event created.|
 
-### m. `Post` Object
+### n. `Post` Object
 This shows a user post.
 
 |Member|Type|Description|
@@ -187,7 +197,7 @@ This shows a user post.
 |document|Document|A document of the content of the post.|
 |created_at|ulong|A UNIX timestamp when the post created.|
 
-### n. `PostLike` Object
+### o. `PostLike` Object
 This shows a "Like!" reaction of a post.
 
 |Member|Type|Description|
@@ -197,7 +207,7 @@ This shows a "Like!" reaction of a post.
 |post|Post|A board that the user liked.|
 |created_at|ulong|A UNIX timestamp when the user liked the post.|
 
-### o. `Profile` Object
+### p. `Profile` Object
 This shows a profile of a user.
 
 |Member|Type|Description|
@@ -211,8 +221,28 @@ This shows a profile of a user.
 
 ## 7. Endpoints
 
-### a. GET /types/show
-This provides a permission type.
+### a. GET /permissions/show
+This provides a permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|id|string|The UUID of the permission to show.|
+
+#### ii. Response
+This returns a `Permission` object.
+
+### b. GET /permissions/list
+This provides a list of permissions.
+
+#### i. Request Parameters
+This needs **no** parameters.
+
+#### ii. Response
+This returns an array of `Permissions` objects.
+
+### c. GET /types/show
+This provides a user type.
 This requires **read_types** permission.
 
 #### i. Request Parameters
@@ -221,32 +251,32 @@ This requires **read_types** permission.
 |id|string|The UUID of the type to show.|
 
 #### ii. Response
-This returns a `PermissionType` object.
+This returns a `UserType` object.
 
-### b. GET /types/list
-This provides a list of permission types.
+### d. GET /types/list
+This provides a list of user types.
 This requires **read_types** permission.
 
 #### i. Request Parameters
 This needs **no** parameters.
 
 #### ii. Response
-This returns an array of `PermissionType` objects.
+This returns an array of `UserType` objects.
 
-### c. POST /types/create
-This creates or edits a permission type.
+### e. POST /types/create
+This creates or edits a user type.
 This requires **write_types** permission.
 
 #### i. Request Parameters
 |Parameter|Type|Description|
 |---|---|---|
 |id|string|Optional. If this is provided, the user can edit the type.|
-|*(Permission)*|bool|Whether the type has the permission. (Default: false, keep when editing)|
+|permissions|string (comma-separated array)|Permissions that the user of the type has.|
 
 #### ii. Response
-This returns the `PermissionType` object that the user created or edited.
+This returns the `UserType` object that the user created or edited.
 
-### d. GET /regions/show
+### f. GET /regions/show
 This provides a region.
 This requires **read_regions** permission.
 
@@ -258,7 +288,7 @@ This requires **read_regions** permission.
 #### ii. Response
 This returns a `Region` object.
 
-### e. GET /regions/list
+### g. GET /regions/list
 This provides a list of regions.
 This requires **read_regions** permission.
 
@@ -268,7 +298,7 @@ This needs **no** parameters.
 #### ii. Response
 This returns an array of `Region` objects.
 
-### f. POST /regions/create
+### h. POST /regions/create
 This creates or edits a region.
 This requires **write_regions** permission.
 
@@ -278,7 +308,7 @@ This requires **write_regions** permission.
 |id|string|Optional. If this is provided, the user can edit the region.|
 |name|string|A name of the region.|
 
-### g. GET /groups/show
+### i. GET /groups/show
 This provides a group.
 This requires **read_groups** permission.
 
@@ -290,7 +320,7 @@ This requires **read_groups** permission.
 #### ii. Response
 This returns a `Group` object.
 
-### h. GET /groups/list
+### j. GET /groups/list
 This provides a list of groups in a region.
 This requires **read_groups** permission.
 If `region` parameter is not equals to the current region,
@@ -304,7 +334,7 @@ it also requires **read_regions** permission.
 #### ii. Response
 This returns an array of `Group` objects.
 
-### i. POST /groups/create
+### k. POST /groups/create
 This creates or edits a group.
 This requires **write_groups** permission.
 
@@ -317,7 +347,7 @@ This requires **write_groups** permission.
 #### ii. Response
 This returns the `Group` object that the user created or edited.
 
-### d. GET /sessions/current
+### l. GET /sessions/current
 This provides the current session.
 
 #### i. Request Parameters
@@ -326,7 +356,7 @@ This needs **no** parameters.
 #### ii. Response
 This returns the `Session` object of the current session with `200 OK` status.
 
-### e. GET /users/me
+### m. GET /users/me
 This provides who is the authorized user with the current session.
 
 #### i. Request Parameters
@@ -335,7 +365,7 @@ This needs **no** parameters.
 #### ii. Response
 This returns an `User` object of the current user.
 
-### f. POST /users/create
+### n. POST /users/create
 This creates a user.
 
 #### i. Request Parameters
@@ -351,7 +381,7 @@ This creates a user.
 #### ii. Response
 This returns `CreatedUser` object.
 
-### g. POST /sessions/create
+### o. POST /sessions/create
 This creates a session from the token.
 This **doesn't need to authorize** .
 
@@ -363,7 +393,7 @@ This **doesn't need to authorize** .
 #### ii. Response
 This returns the created `CreatedSession` object with `200 OK` status.
 
-### h. DELETE /sessions/destroy
+### p. DELETE /sessions/destroy
 This destroys the session.
 
 #### i. Request Parameters
@@ -372,7 +402,7 @@ This needs **no** parameters.
 #### ii. Response
 This returns only `204 No Content` status.
 
-### i. GET /profiles/mine
+### q. GET /profiles/mine
 This provides a profile of the user who has the current session.
 
 #### i. Request Parameters
