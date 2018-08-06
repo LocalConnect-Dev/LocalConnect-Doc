@@ -324,6 +324,9 @@ This requires **write_regions** permission.
 |id|string|Optional. If this is provided, the user can edit the region.|
 |name|string|A name of the region.|
 
+#### ii. Response
+This returns a `Region` object that the use created or edited.
+
 ### i. GET /groups/show
 This provides a group.
 This requires **read_groups** permission.
@@ -459,9 +462,13 @@ This requires **read_documents** permission.
 |Parameter|Type|Description|
 |---|---|---|
 |user|string|Optional. The UUID of the user to list documents. (Default: current user)|
+|until|string|Optional. The oldest document that it returns.|
+|since|string|Optional. The latest document that it returns.|
 
 #### ii. Response
-This returns an array of `Document` objects.
+This returns an array of `Document` objects. (Descending to latest one)
+The array contains **100 objects max.**
+If the objects between `until` and `since` are over maximum of the array, it returns from latest.
 
 ### u. POST /documents/create
 This creates or edits a document.
@@ -509,9 +516,13 @@ This requires **read_boards** permission.
 |Parameter|Type|Description|
 |---|---|---|
 |group|string|Optional. The UUID of the group to list boards. (Default: current group)|
+|until|string|Optional. The oldest document that it returns.|
+|since|string|Optional. The latest document that it returns.|
 
 #### ii. Response
 This returns an array of `Board` objects.
+The array contains **100 objects max.**
+If the objects between `until` and `since` are over maximum of the array, it returns from latest.
 
 ### y. POST /boards/read
 This mark a board read.
@@ -558,9 +569,13 @@ This requires **read_events** permission.
 |Parameter|Type|Description|
 |---|---|---|
 |user|string|Optional. The UUID of the user to list events. (Default: current user)|
+|until|string|Optional. The oldest document that it returns.|
+|since|string|Optional. The latest document that it returns.|
 
 #### ii. Response
 This returns an array of `Event` objects.
+The array contains **100 objects max.**
+If the objects between `until` and `since` are over maximum of the array, it returns from latest.
 
 ### ac. GET /events/list_group
 This provides a list of events of a group.
@@ -570,9 +585,13 @@ This requires **read_events** permission.
 |Parameter|Type|Description|
 |---|---|---|
 |group|string|Optional. The UUID of the group to list events. (Default: the group of current user)|
+|until|string|Optional. The oldest document that it returns.|
+|since|string|Optional. The latest document that it returns.|
 
 #### ii. Response
 This returns an array of `Event` objects.
+The array contains **100 objects max.**
+If the objects between `until` and `since` are over maximum of the array, it returns from latest.
 
 ### ad. POST /events/join
 This creates attendance of a event and a user.
@@ -632,9 +651,13 @@ This requires **read_posts** permission.
 |Parameter|Type|Description|
 |---|---|---|
 |user|string|Optional. The UUID of the user to list posts. (Default: current user)|
+|until|string|Optional. The oldest document that it returns.|
+|since|string|Optional. The latest document that it returns.|
 
 #### ii. Response
 This returns an array of `Post` objects.
+The array contains **100 objects max.**
+If the objects between `until` and `since` are over maximum of the array, it returns from latest.
 
 ### ai. GET /posts/list_group
 This provides a list of posts of a user.
@@ -644,9 +667,13 @@ This requires **read_posts** permission.
 |Parameter|Type|Description|
 |---|---|---|
 |group|string|Optional. The UUID of the group to list posts. (Default: current group)|
+|until|string|Optional. The oldest document that it returns.|
+|since|string|Optional. The latest document that it returns.|
 
 #### ii. Response
 This returns an array of `Post` objects.
+The array contains **100 objects max.**
+If the objects between `until` and `since` are over maximum of the array, it returns from latest.
 
 ### aj. POST /posts/like
 This likes a post.
