@@ -360,6 +360,7 @@ This requires **write_groups** permission.
 |---|---|---|
 |id|string|Optional. If this is provided, the user can edit the group.|
 |name|string|A name of the group.|
+|region|string|The UUID of the region that the group belongs to.|
 
 #### ii. Response
 This returns the `Group` object that the user created or edited.
