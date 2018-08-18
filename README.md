@@ -594,7 +594,21 @@ This returns an array of `Event` objects.
 The array contains **100 objects max.**
 If the objects between `until` and `since` are over maximum of the array, it returns from latest.
 
-### ad. POST /events/join
+### ad. GET /events/attendances
+This provides a list of attendances of a event.
+This requires **read_events** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|event|string|The UUID of the event to list attendances.|
+
+#### ii. Response
+This returns an array of `EventAttendance` objects.
+The array contains **100 objects max.**
+If the objects between `until` and `since` are over maximum of the array, it returns from latest.
+
+### ae. POST /events/join
 This creates attendance of a event and a user.
 This requires **read_events** permission.
 
@@ -606,7 +620,7 @@ This requires **read_events** permission.
 #### ii. Response
 This returns the `EventAttendance` object.
 
-### ae. POST /events/create
+### af. POST /events/create
 This creates or edits a event.
 This requires **write_events** permission.
 
@@ -620,7 +634,7 @@ This requires **write_events** permission.
 #### ii. Response
 This returns the `Event` object that the user created or edited.
 
-### af. GET /posts/show
+### ag. GET /posts/show
 This provides a post.
 This requires **read_posts** permission.
 
@@ -632,7 +646,7 @@ This requires **read_posts** permission.
 #### ii. Response
 This returns an `Post` object.
 
-### ag. GET /posts/likes
+### ah. GET /posts/likes
 This provides who liked the post.
 This requires **read_posts** permission.
 
@@ -644,7 +658,7 @@ This requires **read_posts** permission.
 #### ii. Response
 This returns an array of `PostLike` objects.
 
-### ah. GET /posts/list_user
+### ai. GET /posts/list_user
 This provides a list of posts of a user.
 This requires **read_posts** permission.
 
@@ -660,7 +674,7 @@ This returns an array of `Post` objects.
 The array contains **100 objects max.**
 If the objects between `until` and `since` are over maximum of the array, it returns from latest.
 
-### ai. GET /posts/list_group
+### aj. GET /posts/list_group
 This provides a list of posts of a user.
 This requires **read_posts** permission.
 
@@ -676,7 +690,7 @@ This returns an array of `Post` objects.
 The array contains **100 objects max.**
 If the objects between `until` and `since` are over maximum of the array, it returns from latest.
 
-### aj. POST /posts/like
+### ak. POST /posts/like
 This likes a post.
 This requires **read_posts** permission.
 
@@ -688,7 +702,7 @@ This requires **read_posts** permission.
 #### ii. Response
 This returns a `PostLike` object that the user reacted.
 
-### ak. POST /posts/create
+### al. POST /posts/create
 This creates or edits a post.
 This requires **write_posts** permission.
 
@@ -701,7 +715,7 @@ This requires **write_posts** permission.
 #### ii. Response
 This returns the `Post` object that the user created or edited.
 
-### al. GET /profiles/mine
+### am. GET /profiles/mine
 This provides a profile of the user who has the current session.
 
 #### i. Request Parameters
@@ -710,7 +724,7 @@ This needs **no** parameters.
 #### ii. Response
 This returns an `Profile` object of the profile of the current user.
 
-### am. GET /profiles/show
+### an. GET /profiles/show
 This provides a profile.
 This requires **read_profiles** permission.
 
@@ -722,7 +736,7 @@ This requires **read_profiles** permission.
 #### ii. Response
 This returns an `Profile` object.
 
-### an. GET /profiles/lookup
+### ao. GET /profiles/lookup
 This provides a profile of a user.
 This requires **read_profiles** permission.
 
@@ -734,7 +748,7 @@ This requires **read_profiles** permission.
 #### ii. Response
 This returns an `Profile` object.
 
-### ao. POST /profiles/create
+### ap. POST /profiles/create
 This creates or edits a profile of the current user.
 This requires **write_posts** permission.
 
