@@ -191,6 +191,7 @@ This shows a event.
 |author|User|A user who created the event.|
 |document|Document|A document that is described the event.|
 |date|ulong|A UNIX timestamp when the event will start.|
+|attendances|EventAttendance[]|An array of attendnaces of the event.|
 |created_at|ulong|A UNIX timestamp when the event created.|
 
 ### n. `EventAttendance` Object
@@ -200,7 +201,6 @@ This shows a attendance of a event and a user.
 |---|---|---|
 |id|string|An UUID of the attendance.|
 |user|User|A user of the attendee.|
-|event|Event|A event that the attendee joins.|
 |created_at|ulong|A UNIX timestamp when the attendee decided to join.|
 
 ### o. `Post` Object
@@ -211,6 +211,7 @@ This shows a user post.
 |id|string|An UUID of the post.|
 |author|User|A user who posted.|
 |document|Document|A document of the content of the post.|
+|likes|PostLike[]|An array of like reactions of the post.|
 |created_at|ulong|A UNIX timestamp when the post created.|
 
 ### p. `PostLike` Object
@@ -220,7 +221,6 @@ This shows a "Like!" reaction of a post.
 |---|---|---|
 |id|string|An UUID of the reaction.|
 |user|User|A user who liked.|
-|post|Post|A board that the user liked.|
 |created_at|ulong|A UNIX timestamp when the user liked the post.|
 
 ### q. `Profile` Object
