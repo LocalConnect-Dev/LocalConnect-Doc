@@ -44,6 +44,7 @@ This shows usage of the Local Connect API.
 |read_events|Whether the user can read events.|
 |read_posts|Whether the user can read posts.|
 |read_profiles|Whether the user can read profiles.|
+|read_images|Whether the user can read images.|
 |write_types|Whether the user can create or edit user types.|
 |write_regions|Whether the user can create or edit regions.|
 |write_groups|Whether the user can create or edit groups.|
@@ -53,6 +54,7 @@ This shows usage of the Local Connect API.
 |write_events|Whether the user can create or edit events.|
 |write_posts|Whether the user can post.|
 |write_profiles|Whether the user can edit profiles.|
+|write_images|Whether the user can upload images.|
 
 ## 5. Types
 This shows the definition and the range of each types of values.
@@ -786,6 +788,7 @@ This returns the `Profile` object that the user created or edited.
 
 ### ar. GET /images/show
 This provides a image.
+This requires **read_images** permission.
 **This doesn't return JSON data**.
 
 #### i. Request Parameters
@@ -798,6 +801,7 @@ This returns **image binary data**.
 
 ### as. POST /images/create
 This creates a image from the uploaded file.
+This requires **write_images** permission.
 
 #### i. Request
 This requires image binary data to upload in the request body.
