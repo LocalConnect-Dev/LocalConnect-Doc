@@ -162,9 +162,19 @@ This shows a universal documentation.
 |author|User|A user who created the document.|
 |title|string|Title of the document. (Max. 512 chars)|
 |content|string|Content of the document.|
+|attachments|Attachment[]|An array of attachments of the document.|
 |created_at|ulong|A UNIX timestamp when the document created.|
 
-### k. `Board` Object
+### k. `Attachment` Object
+This shows an attachment of a document.
+
+|Member|Type|Description|
+|---|---|---|
+|id|string|An UUID of the attachment.|
+|type|string|The type of the object.|
+|object|object (any)|An object attached to the document.|
+
+### l. `Board` Object
 This shows a bulletin board.
 
 |Member|Type|Description|
@@ -175,7 +185,7 @@ This shows a bulletin board.
 |created_at|ulong|A UNIX timestamp when the board created.|
 
 
-### l. `BoardRead` Object
+### m. `BoardRead` Object
 This shows a user-read mark of a board.
 
 |Member|Type|Description|
@@ -185,7 +195,7 @@ This shows a user-read mark of a board.
 |board|Board|A board that the user read.|
 |created_at|ulong|A UNIX timestamp when the user read the board.|
 
-### m. `Event` Object
+### n. `Event` Object
 This shows a event.
 
 |Member|Type|Description|
@@ -197,7 +207,7 @@ This shows a event.
 |attendances|EventAttendance[]|An array of attendnaces of the event.|
 |created_at|ulong|A UNIX timestamp when the event created.|
 
-### n. `EventAttendance` Object
+### o. `EventAttendance` Object
 This shows a attendance of a event and a user.
 
 |Member|Type|Description|
@@ -206,7 +216,7 @@ This shows a attendance of a event and a user.
 |user|User|A user of the attendee.|
 |created_at|ulong|A UNIX timestamp when the attendee decided to join.|
 
-### o. `Post` Object
+### p. `Post` Object
 This shows a user post.
 
 |Member|Type|Description|
@@ -217,7 +227,7 @@ This shows a user post.
 |likes|PostLike[]|An array of like reactions of the post.|
 |created_at|ulong|A UNIX timestamp when the post created.|
 
-### p. `PostLike` Object
+### q. `PostLike` Object
 This shows a "Like!" reaction of a post.
 
 |Member|Type|Description|
@@ -226,7 +236,7 @@ This shows a "Like!" reaction of a post.
 |user|User|A user who liked.|
 |created_at|ulong|A UNIX timestamp when the user liked the post.|
 
-### q. `Profile` Object
+### r. `Profile` Object
 This shows a profile of a user.
 
 |Member|Type|Description|
@@ -238,13 +248,14 @@ This shows a profile of a user.
 |mottoes|string|Mottoes of the user. (Max. 512 chars)|
 |updated_at|ulong|A UNIX timestamp when the profile last updated.|
 
-### r. `Image` object
+### s. `Image` object
 This shows an image.
 
 |Member|Type|Description|
 |---|---|---|
 |id|An UUID of the image.|
 |owner|User|A user who uploaded the image.|
+|created_at|ulong|A UNIX timestamp when the image created.|
 
 ## 7. Endpoints
 
