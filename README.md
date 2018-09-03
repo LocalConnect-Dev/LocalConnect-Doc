@@ -516,6 +516,7 @@ This requires **write_documents** permission.
 |id|string|Optional. If this is provided, the user can edit the document.|
 |title|string|A title of the document.|
 |content|string|A content of the document.|
+|attachments|string (comma-separated array)|Optional. An array of attachments to attach to the document.|
 
 #### ii. Response
 This returns the `Document` object that the user created or edited.
