@@ -598,6 +598,7 @@ This requires **read_events** permission.
 #### ii. Response
 This returns an `Event` object.
 
+
 ### ac. GET /events/list_user
 This provides a list of events that a user hold.
 This requires **read_events** permission.
@@ -614,7 +615,23 @@ This returns an array of `Event` objects.
 The array contains **100 objects max.**
 If the objects between `until` and `since` are over maximum of the array, it returns from latest.
 
-### ad. GET /events/list_group
+### ad. GET /events/list_joined
+This provides a list of events that the user joined.
+This requires **read_events** permission.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|user|string|Optional. The UUID of the user to list joined events. (Default: current user)|
+|until|string|Optional. The oldest document that it returns.|
+|since|string|Optional. The latest document that it returns.|
+
+#### ii. Response
+This returns an array of `Event` objects.
+The array contains **100 objects max.**
+If the objects between `until` and `since` are over maximum of the array, it returns from latest.
+
+### ae. GET /events/list_group
 This provides a list of events of a group.
 This requires **read_events** permission.
 
@@ -630,7 +647,7 @@ This returns an array of `Event` objects.
 The array contains **100 objects max.**
 If the objects between `until` and `since` are over maximum of the array, it returns from latest.
 
-### ae. POST /events/join
+### af. POST /events/join
 This creates attendance of a event and a user.
 This requires **read_events** permission.
 
@@ -642,7 +659,7 @@ This requires **read_events** permission.
 #### ii. Response
 This returns the `EventAttendance` object.
 
-### af. POST /events/create
+### ag. POST /events/create
 This creates or edits a event.
 This requires **write_events** permission.
 
@@ -656,7 +673,7 @@ This requires **write_events** permission.
 #### ii. Response
 This returns the `Event` object that the user created or edited.
 
-### ag. GET /posts/show
+### ah. GET /posts/show
 This provides a post.
 This requires **read_posts** permission.
 
@@ -668,7 +685,7 @@ This requires **read_posts** permission.
 #### ii. Response
 This returns an `Post` object.
 
-### ah. GET /posts/list_user
+### ai. GET /posts/list_user
 This provides a list of posts of a user.
 This requires **read_posts** permission.
 
@@ -684,7 +701,7 @@ This returns an array of `Post` objects.
 The array contains **100 objects max.**
 If the objects between `until` and `since` are over maximum of the array, it returns from latest.
 
-### ai. GET /posts/list_group
+### aj. GET /posts/list_group
 This provides a list of posts of a user.
 This requires **read_posts** permission.
 
@@ -700,7 +717,7 @@ This returns an array of `Post` objects.
 The array contains **100 objects max.**
 If the objects between `until` and `since` are over maximum of the array, it returns from latest.
 
-### aj. POST /posts/like
+### ak. POST /posts/like
 This likes a post.
 This requires **read_posts** permission.
 
@@ -712,7 +729,7 @@ This requires **read_posts** permission.
 #### ii. Response
 This returns a `PostLike` object that the user reacted.
 
-### ak. POST /posts/create
+### al. POST /posts/create
 This creates or edits a post.
 This requires **write_posts** permission.
 
@@ -725,7 +742,7 @@ This requires **write_posts** permission.
 #### ii. Response
 This returns the `Post` object that the user created or edited.
 
-### al. GET /profiles/mine
+### am. GET /profiles/mine
 This provides a profile of the user who has the current session.
 
 #### i. Request Parameters
@@ -734,7 +751,7 @@ This needs **no** parameters.
 #### ii. Response
 This returns an `Profile` object of the profile of the current user.
 
-### am. GET /profiles/show
+### an. GET /profiles/show
 This provides a profile.
 This requires **read_profiles** permission.
 
@@ -746,7 +763,7 @@ This requires **read_profiles** permission.
 #### ii. Response
 This returns an `Profile` object.
 
-### an. GET /profiles/lookup
+### ao. GET /profiles/lookup
 This provides a profile of a user.
 This requires **read_profiles** permission.
 
@@ -758,7 +775,7 @@ This requires **read_profiles** permission.
 #### ii. Response
 This returns an `Profile` object.
 
-### ao. POST /profiles/create
+### ap. POST /profiles/create
 This creates or edits a profile of the current user.
 This requires **write_posts** permission.
 
@@ -772,7 +789,7 @@ This requires **write_posts** permission.
 #### ii. Response
 This returns the `Profile` object that the user created or edited.
 
-### ap. GET /images/show
+### aq. GET /images/show
 This provides a image.
 This requires **read_images** permission.
 **This doesn't return JSON data**.
@@ -785,7 +802,7 @@ This requires **read_images** permission.
 #### ii. Response
 This returns **image binary data**.
 
-### aq. POST /images/create
+### ar. POST /images/create
 This creates a image from the uploaded file.
 This requires **write_images** permission.
 
