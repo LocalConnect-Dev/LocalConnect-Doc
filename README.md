@@ -113,6 +113,7 @@ This shows a group in a region that has users.
 |id|An UUID of the group.|
 |region|Region|A region that the group is in.|
 |name|A name of the group. (Max. 255 chars)|
+|description|Detail of the group. (Max. 100K chars)|
 |created_at|ulong|A UNIX timestamp when the group created.|
 
 ### f. `User` Object
