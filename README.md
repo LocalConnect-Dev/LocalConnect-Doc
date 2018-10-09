@@ -34,6 +34,7 @@ This shows usage of the Local Connect API.
 
 |Permission|Description|
 |---|---|
+|**root**|**WHETHER THE USER HAVE ALL PERMISSIONS. THE DECISION TO USE THIS MAY CORRUPT THE SERVICE.**|
 |read_permissions|Whether the user can read permissions.|
 |read_types|Whether the user can read user types.|
 |read_regions|Whether the user can read regions.|
@@ -153,7 +154,6 @@ This shows a created session.
 |---|---|---|
 |secret|string|A secret of the created session.|
 
-
 ### j. `Document` Object
 This shows a universal documentation.
 
@@ -184,7 +184,6 @@ This shows a bulletin board.
 |group|Group|A group that the board provided in.|
 |documents|Document[]|Array of documents in the board.|
 |created_at|ulong|A UNIX timestamp when the board created.|
-
 
 ### m. `BoardRead` Object
 This shows a user-read mark of a board.
@@ -257,6 +256,13 @@ This shows an image.
 |id|An UUID of the image.|
 |owner|User|A user who uploaded the image.|
 |created_at|ulong|A UNIX timestamp when the image created.|
+
+### t. `Service` object
+This shows the service summary.
+
+|Member|Type|Description|
+|---|---|---|
+|description|string|Detail of the service. (Max. 100K chars)|
 
 ## 7. Endpoints
 
@@ -346,6 +352,7 @@ This requires **write_regions** permission.
 |---|---|---|
 |id|string|Optional. If this is provided, the user can edit the region.|
 |name|string|A name of the region.|
+|description|string|Detail of the group. (Max. 100K chars)|
 
 #### ii. Response
 This returns a `Region` object that the use created or edited.
@@ -382,8 +389,9 @@ This requires **write_groups** permission.
 |Parameter|Type|Description|
 |---|---|---|
 |id|string|Optional. If this is provided, the user can edit the group.|
-|name|string|A name of the group.|
 |region|string|The UUID of the region that the group belongs to.|
+|name|string|A name of the group.|
+|description|string|Detail of the group. (Max. 100K chars)|
 
 #### ii. Response
 This returns the `Group` object that the user created or edited.
@@ -429,9 +437,9 @@ This requires **write_users** permission.
 |Parameter|Type|Description|
 |---|---|---|
 |id|string|Optional. If this is provided, it can edit the user.|
-|name|string|The name of the user.|
-|type|string|The UUID of the user type.|
 |group|string|The UUID of the group that the user belongs to.|
+|type|string|The UUID of the user type.|
+|name|string|The name of the user.|
 
 #### ii. Response
 This returns the `CreatedUser` object that the user created or edited.
@@ -812,5 +820,39 @@ This requires image binary data to upload in the request body.
 
 #### ii. Response
 This returns the `Image` object that the user created.
+
+### as. POST /attachments/create
+This creates a attachment from specified object.
+This requires **write_documents** permission.
+**If the attachments that has same object exists, the system can recycle the attachment**.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|type|string|The type of the object to attach. (e.g. 'Image' or 'Event')|
+|object_id|string|The UUID of the object to attach.|
+
+#### ii. Response
+This returns the `Attachment` object that the user created.
+
+### at. GET /service/show
+This provides the service summary.
+This requires no permission(s).
+
+#### i. Request Parameters
+This needs **no** parameters.
+
+#### ii. Response
+This returns the `Service` object.
+
+### au. POST /service/edit
+This edits the service summary.
+This requires **root** permission.
+**This may corrupt the service**.
+
+#### i. Request Parameters
+|Parameter|Type|Description|
+|---|---|---|
+|description|string|Detail of the service. (Max. 100K chars)|
 
 ## 8. Notes
