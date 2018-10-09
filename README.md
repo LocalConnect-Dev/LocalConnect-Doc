@@ -854,5 +854,3 @@ This requires **root** permission.
 |Parameter|Type|Description|
 |---|---|---|
 |description|string|Detail of the service. (Max. 100K chars)|
-
-## 8. Notes
