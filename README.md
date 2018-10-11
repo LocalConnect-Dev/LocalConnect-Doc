@@ -34,7 +34,6 @@ This shows usage of the Local Connect API.
 
 |Permission|Description|
 |---|---|
-|**root**|**WHETHER THE USER HAVE ALL PERMISSIONS. THE DECISION TO USE THIS MAY CORRUPT THE SERVICE.**|
 |read_permissions|Whether the user can read permissions.|
 |read_types|Whether the user can read user types.|
 |read_regions|Whether the user can read regions.|
@@ -56,6 +55,7 @@ This shows usage of the Local Connect API.
 |write_posts|Whether the user can post.|
 |write_profiles|Whether the user can edit profiles.|
 |write_images|Whether the user can upload images.|
+|write_service|Whether the user can edit service summary.|
 
 ## 5. Types
 This shows the definition and the range of each types of values.
@@ -847,8 +847,7 @@ This returns the `Service` object.
 
 ### au. POST /service/edit
 This edits the service summary.
-This requires **root** permission.
-**This may corrupt the service**.
+This requires **write_service** permission.
 
 #### i. Request Parameters
 |Parameter|Type|Description|
