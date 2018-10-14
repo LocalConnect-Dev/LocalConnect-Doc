@@ -837,7 +837,7 @@ This returns the `Attachment` object that the user created.
 
 ### at. GET /service/show
 This provides the service summary.
-This requires no permission(s).
+This **doesn't need to authorize** .
 
 #### i. Request Parameters
 This needs **no** parameters.
